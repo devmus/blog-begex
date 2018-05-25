@@ -1,11 +1,21 @@
 const express = require('express');
 const app = express();
+const path = require('path');
+const exphbs = require('express-handlebars');
+
+
+// Set dinamic Public folder
+app.use('/static', express.static(path.join(__dirname, 'public')));
+
+// Set views engine Handlebars template 
+app.engine('handlebars', exphbs({defaultLayout: 'home'}));
+app.set('view engine', 'handlebars');
 
 
 // test route
 app.get('/', (req, res) => {
 
-    res.send('Hallo');
+    res.render('home');
 });
 
 
